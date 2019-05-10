@@ -1,30 +1,29 @@
 package com.freshvotes.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.freshvotes.security.Authority;
 
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
-	// @Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	private Long id;
+
 	private String username;
 	private String password;
 	private String name;
 
-//	public Long getId() {
-//		return id;
-//	}
-//
-//	public void setId(Long id) {
-//		this.id = id;
-//	}
+	// Authorities of the user - should be in database
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+	private Set<Authority> authorities = new HashSet<>();
 
 	public String getUsername() {
 		return username;
@@ -48,6 +47,14 @@ public class User extends BaseEntity {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Set<Authority> getAuthorities() {
+		return authorities;
+	}
+
+	public void setAuthorities(Set<Authority> authorities) {
+		this.authorities = authorities;
 	}
 
 }
