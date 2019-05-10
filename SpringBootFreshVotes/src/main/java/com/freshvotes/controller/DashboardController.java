@@ -22,9 +22,9 @@ public class DashboardController {
 		return "dashboard";
 	}
 
-	@PostMapping("/dashboard")
-	public String dashboard() {
-		return "dashboard";
-	}
+//	@PostMapping("/dashboard")
+//	public String dashboard() {
+//		return "dashboard";
+//	}
 
 }
